@@ -7,6 +7,20 @@
   --soft-text: #626262;
 }
 
+.light{
+  --background: #ffffff;
+  --text: #000000;
+  --soft-background: #f0f0f0;
+  --soft-text: #626262;
+}
+
+.dark{
+  --background: #0f172a;
+  --text: #ffffff;
+  --soft-background: #1e293b;
+  --soft-text: #94a3b8;
+}
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -21,6 +35,7 @@ body{
 .root-container{
   min-height: 100vh;
   color: var(--text);
+  background-color: var(--background);
 }
 
 a{
