@@ -1,25 +1,34 @@
 "use client";
 
 import Image from "next/image";
+import { useSyncExternalStore } from "react";
+import { useTheme } from "next-themes";
 import styles from "./themeToggle.module.css";
-import { useTheme } from "@/context/ThemeContext";
+
+const subscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 const ThemeToggle = () => {
-  const { toggleTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
+  const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
+
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
-    <div
+    <button
+      type="button"
       className={styles.container}
-      onClick={toggleTheme}
-      // style={theme === "dark" ? { backgroundColor: "#fff" } : { backgroundColor: "#0f172a" }}
+      aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
     >
       <Image src="/moon.png" alt="" width={14} height={14} />
       <div
         className={styles.ball}
-        style={theme === "dark" ? {left : 1, backgroundColor: "#0f172a"} : {right : 1, backgroundColor: "#facc15"}}
+        style={isDark ? { left: 1, backgroundColor: "#0f172a" } : { right: 1, backgroundColor: "#facc15" }}
       ></div>
       <Image src="/sun.png" alt="" width={14} height={14} />
-    </div>
+    </button>
   );
 };
 

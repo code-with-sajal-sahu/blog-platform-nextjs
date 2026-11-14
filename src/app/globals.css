@@ -7,14 +7,7 @@
   --soft-text: #626262;
 }
 
-.light{
-  --background: #ffffff;
-  --text: #000000;
-  --soft-background: #f0f0f0;
-  --soft-text: #626262;
-}
-
-.dark{
+html.dark {
   --background: #0f172a;
   --text: #ffffff;
   --soft-background: #1e293b;
