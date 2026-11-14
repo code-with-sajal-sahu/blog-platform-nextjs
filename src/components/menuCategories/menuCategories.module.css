@@ -1,0 +1,35 @@
+
+.catg_list{
+    margin: 35px 0 60px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.category{
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #ffffff;
+    width: max-content;
+    text-transform: capitalize;
+}
+
+.category.category-1{
+    background-color: #f59292;
+}
+.category.category-2 {
+    background-color: #5c7a9f;
+}
+.category.category-3 {
+    background-color: #f55963;
+}
+.category.category-4 {
+    background-color: #5bb156;
+}
+.category.category-5 {
+    background-color: #543eaa;
+}
+.category.category-6 {
+    background-color: #92f5b0;
+}

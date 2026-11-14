@@ -1,0 +1,50 @@
+.container{
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.img_container{
+    flex: 1;
+    height: 350px;
+    position: relative;
+}
+
+.image{
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.text_container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.post_title{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.date{
+    color: #808080;
+}
+
+.category{
+    color: #dc143c;
+    font-weight: 500;
+}
+
+.post_desc{
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--soft-text);
+}
+
+.read_more{
+    border-bottom: 2px solid var(--text);
+    padding: 2px 0;
+    width: max-content;
+}
