@@ -85,3 +85,10 @@
 .date{
     color: #808080;
 }
+
+
+@media screen and (max-width: 1024px){
+    .container{
+        display: none;
+    }
+}

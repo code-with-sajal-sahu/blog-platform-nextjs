@@ -9,10 +9,6 @@ const Card = () => {
         <Image src="/p1.jpeg" alt="Post Image" fill className={styles.image} />
       </div>
       <div className={styles.text_container}>
-        <div className={styles.meta}>
-          <span className={styles.date}>January 1, 2023 - </span>
-          <span className={styles.category}>Coding</span>
-        </div>
         <Link href="/">
           <h1 className={styles.post_title}>Lorem Ipsum</h1>
         </Link>
@@ -22,6 +18,10 @@ const Card = () => {
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.
         </p>
+        <div className={styles.meta}>
+          <span className={styles.date}>January 1, 2023 - </span>
+          <span className={styles.category}>Coding</span>
+        </div>        
         <Link href="/" className={styles.read_more}>
           Read More
         </Link>
