@@ -55,6 +55,10 @@ a{
   padding-right: 80px;
 }
 
+.editor-wrapper .bn-editor{
+ min-height: 474px;
+}
+
 @media screen and (max-width: 1536px) {
   .wrapper{
     max-width: 1366px;
