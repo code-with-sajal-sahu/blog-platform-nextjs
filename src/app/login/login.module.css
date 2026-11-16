@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.wrapper {
+  background-color: var(--soft-background);
+  padding: 150px 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  border-radius: 10px;
+}
+
+.social-button {
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.social_btn {
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.google_btn {
+  background: #ffffff;
+  color: #1f1f1f;
+  border: 1px solid #747775;
+}
+
+.github_btn {
+  background: #24292f;
+  color: #ffffff;
+  border: 1px solid #24292f;
+}
+
+.facebook_btn {
+  background: #1877f2;
+  color: #ffffff;
+  border: 1px solid #1877f2;
+}
+
+.github_btn:hover {
+  background: #32383f;
+}
+
+.facebook_btn:hover {
+  background: #1666d8;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    padding: 50px 100px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .wrapper {
+    padding: 30px;
+  }
+}

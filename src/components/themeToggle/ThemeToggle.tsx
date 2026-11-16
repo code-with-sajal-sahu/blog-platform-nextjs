@@ -14,7 +14,9 @@ const ThemeToggle = () => {
   const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
 
   const isDark = mounted && resolvedTheme === "dark";
-
+  if(!mounted){
+    return null;
+  }
   return (
     <button
       type="button"

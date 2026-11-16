@@ -27,7 +27,7 @@
 .avatar {
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid #d3d3d3;
+  border: 3px solid #d3d3d3;
 }
 
 .meta_text {
@@ -64,7 +64,7 @@
 
 .blog_desc {
   flex: 5;
-  margin-top: 60px;
+  margin-top: 60px;  
 }
 
 .blog_desc_text p{
@@ -72,3 +72,33 @@
     font-weight: 300;
     margin-bottom: 20px;
 }
+
+.input_section {
+  display: flex;  
+}
+
+
+@media screen and (max-width: 1536px) {
+  .blog_title{
+    font-size: 54px;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .blog_title{
+    font-size: 48px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .info_img{
+    display: none;
+  }
+}
+@media screen and (max-width: 640px) {
+  .blog_title{
+    font-size: 36px;
+  }
+  .blog_desc_text p{
+    font-size: 18px;
+  }
+}
+
