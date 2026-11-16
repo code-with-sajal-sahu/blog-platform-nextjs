@@ -2,9 +2,22 @@
 import { useState } from "react";
 import Image from "next/image";
 import styles from "./writeBlog.module.css";
+import type { Block } from "@blocknote/core";
+import BlockNoteEditor from "@/components/blockNoteEditor/DynamicBlockNoteEditor";
+
 const WriteBlogPage = () => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [content, setContent] = useState<Block[]>([]);
+  const [saveMessage, setSaveMessage] = useState("");
+
+  const handlePublish = () => {
+    // Connect this structured document to the article API when persistence is added.
+    setSaveMessage(
+      content.length > 0
+        ? "Your article content is ready to save."
+        : "Add some content before publishing.",
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -27,13 +40,11 @@ const WriteBlogPage = () => {
           </div>
         )}
       </div>
-      <textarea
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        className={styles.textarea}
-        placeholder="Tell your story..."
-      />
-      <button className={styles.publish_btn}>Publish</button>
+      <BlockNoteEditor onChange={setContent} className={styles.blocknote_editor} />
+      <button className={styles.publish_btn} onClick={handlePublish}>
+        Publish
+      </button>
+      {saveMessage && <p role="status" className={styles.save_message}>{saveMessage}</p>}
     </div>
   );
 };
