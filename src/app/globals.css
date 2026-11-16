@@ -5,6 +5,7 @@
   --text: #000000;
   --soft-background: #f0f0f0;
   --soft-text: #626262;
+  --icon-btn-filter: brightness(0) saturate(100%)
 }
 
 html.dark {
@@ -12,6 +13,7 @@ html.dark {
   --text: #ffffff;
   --soft-background: #1e293b;
   --soft-text: #94a3b8;
+  --icon-btn-filter: brightness(0) saturate(100%) invert(100%) sepia(15%) saturate(7387%) hue-rotate(292deg) brightness(128%) contrast(112%);
 }
 
 *{
