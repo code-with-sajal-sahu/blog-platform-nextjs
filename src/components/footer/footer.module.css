@@ -17,12 +17,16 @@
 .logo{
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 10px;    
 }
 
 .logo_text{
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 600;
+    font-family: var(--font-caveat), sans-serif;
+    cursor: pointer;
+    user-select: none;
+    color: var(--logo-text-color);
 }
 
 .desc{

@@ -1,17 +1,29 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./authLinks.module.css";
+import { signOut } from "next-auth/react";
 
 const AuthLinks = () => {
   const [open, setOpen] = useState(false);
-  const isAuthenticated = false; // Replace with your authentication logic
+  const isAuthenticated = true; // Replace with your authentication logic
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("drawer-open");
+    } else {
+      document.body.classList.remove("drawer-open");
+    }
+
+    return () => {
+      document.body.classList.remove("drawer-open");
+    };
+  }, [open]);  
   return (
     <>
       {isAuthenticated ? (
         <>
-          <Link href="/write" className={styles.link}>Write</Link>
-          <span className={`${styles.logout_link} ${styles.link}`}>Logout</span>
+          <Link href="/write-blog" className={styles.link}>Write</Link>
+          <span className={`${styles.logout_link} ${styles.link}`} onClick={()=>{signOut()}}>Logout</span>
         </>
       ) : (
         <Link href="/login" className={styles.link}>Login</Link>
