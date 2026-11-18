@@ -3,6 +3,7 @@ import { signIn, useSession } from "next-auth/react";
 import styles from "./login.module.css";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import PageLoader from "@/components/pageLoader/PageLoader";
 
 const LoginPage = () => {
   const { status } = useSession();
@@ -14,7 +15,7 @@ const LoginPage = () => {
   }, [status, router]);
 
   if (status === "loading" || status === "authenticated") {
-    return <div className={styles.loading}>Loading...</div>;
+    return <PageLoader/>;
   }
   return (
     <div className={styles.container}>
@@ -25,7 +26,7 @@ const LoginPage = () => {
         >
           Sign in with Google
         </button>
-        <button className={`${styles.social_btn} ${styles.github_btn}`}>
+        <button className={`${styles.social_btn} ${styles.github_btn}`} onClick={() => signIn("github")}>
           Sign in with Github
         </button>
         <button className={`${styles.social_btn} ${styles.facebook_btn}`}>

@@ -1,14 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./writeBlog.module.css";
 import type { Block } from "@blocknote/core";
 import BlockNoteEditor from "@/components/blockNoteEditor/DynamicBlockNoteEditor";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import PageLoader from "@/components/pageLoader/PageLoader";
 
 const WriteBlogPage = () => {
+  const {status} = useSession();
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState<Block[]>([]);
   const [saveMessage, setSaveMessage] = useState("");
+  const router = useRouter();
 
   const handlePublish = () => {
     // Connect this structured document to the article API when persistence is added.
@@ -19,6 +24,15 @@ const WriteBlogPage = () => {
     );
   };
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.replace("/login");
+    }
+  }, [status, router]);
+
+  if (status === "loading" || status === "unauthenticated") {
+    return <PageLoader/>;
+  }
   return (
     <div className={styles.container}>
       <input type="text" placeholder="Title" className={styles.input}/>
