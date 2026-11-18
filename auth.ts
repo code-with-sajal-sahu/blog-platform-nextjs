@@ -1,9 +1,18 @@
-
+import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
-export const AuthOptions = {
-  // Configure one or more authentication providers
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "./lib/prisma";
+
+export const {
+  handlers,
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
+  adapter: PrismaAdapter(prisma),
+
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID!,
@@ -17,6 +26,9 @@ export const AuthOptions = {
       clientId: process.env.FACEBOOK_ID!,
       clientSecret: process.env.FACEBOOK_SECRET!,
     }),
-    // ...add more providers here
   ],
-}
+
+  session: {
+    strategy: "database",
+  },
+});
