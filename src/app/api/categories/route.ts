@@ -1,14 +1,21 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../lib/prisma";
+import type { Category } from "@/types/category";
 
 export const GET = async () => {
   try {
-    const categories = await prisma.category.findMany();
-    return new NextResponse(JSON.stringify({ categories }), { status: 200 });
+    const categories: Category[] = await prisma.category.findMany();
+
+    return NextResponse.json(
+      { categories },
+      { status: 200 }
+    );
   } catch (error) {
-    return new NextResponse(
-      JSON.stringify({ message: "Something went wrong", }),
-      { status: 500 },
+    console.error("Category API Error:", error);
+
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
     );
   }
 };

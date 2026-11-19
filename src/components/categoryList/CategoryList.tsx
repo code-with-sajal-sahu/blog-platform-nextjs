@@ -1,15 +1,32 @@
 import Link from "next/link";
 import styles from "./categoryList.module.css";
 import Image from "next/image";
-const CategoryList = () => {
-  const categories = [
-    { id: 1, name: "style", image: "/style.png" },
-    { id: 2, name: "fashion", image: "/fashion.png" },
-    { id: 3, name: "food", image: "/food.png" },
-    { id: 4, name: "travel", image: "/travel.png" },
-    { id: 5, name: "culture", image: "/culture.png" },
-    { id: 6, name: "coding", image: "/coding.png" },
-  ];
+import { Category } from "@/types/category";
+import { CategoriesResponse } from "@/types/api";
+
+const getData = async (): Promise<Category[]> => {
+  const resp = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`,
+    { cache: "no-store" },
+  );
+  if (!resp.ok) {
+    throw new Error("Failed");
+  }
+  const data: CategoriesResponse = await resp.json();
+
+  return data.categories;
+};
+
+const CategoryList = async () => {
+  // const categories = [
+  //   { id: 1, title: "style", img: "/style.png" },
+  //   { id: 2, title: "fashion", img: "/fashion.png" },
+  //   { id: 3, title: "food", img: "/food.png" },
+  //   { id: 4, title: "travel", img: "/travel.png" },
+  //   { id: 5, title: "culture", img: "/culture.png" },
+  //   { id: 6, title: "coding", img: "/coding.png" },
+  // ];
+  const categories = await getData();
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Popular Categories</h1>
@@ -20,14 +37,16 @@ const CategoryList = () => {
             href={`/blog?category=${category.id}`}
             className={`${styles.category} ${styles["category-" + (index + 1)]}`}
           >
-            <Image
-              src={category.image}
-              alt={category.name}
-              width={32}
-              height={32}
-              className={styles.image}
-            />
-            <span>{category.name}</span>
+            {category.img && (
+              <Image
+                src={category.img}
+                alt={category.title}
+                width={32}
+                height={32}
+                className={styles.image}
+              />
+            )}
+            <span>{category.title}</span>
           </Link>
         ))}
       </div>
