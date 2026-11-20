@@ -7,4 +7,6 @@ export interface CategoriesResponse {
 
 export interface PostsResponse {
   posts: Post[];
+  currentPage: number;
+  totalPages: number;
 }

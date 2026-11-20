@@ -11,3 +11,8 @@
     cursor: pointer;
     border: none;
 }
+
+.button:disabled{
+    background-color: var(--disabled);
+    cursor: default;
+}

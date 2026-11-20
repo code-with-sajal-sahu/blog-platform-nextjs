@@ -1,3 +1,5 @@
+import { Category } from "./category";
+
 export interface Post {
     id: string;
     title: string;
@@ -6,6 +8,7 @@ export interface Post {
     img: string;
     views: number;
     categorySlug: string;
+    category: Category;
     userEmail: string;
     createdAt: Date;
 }

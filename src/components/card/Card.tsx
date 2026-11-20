@@ -20,8 +20,8 @@ const Card = ({data}: CardProps) => {
           {data.desc}
         </p>
         <div className={styles.meta}>
-          <span className={styles.date}>January 1, 2023 - </span>
-          <span className={styles.category}>Coding</span>
+          <span className={styles.date}>{(new Date(data.createdAt)).toLocaleDateString()} - </span>
+          <span className={styles.category}>{data.category.title}</span>
         </div>        
         <Link href={`/blog/${data.slug}`} className={styles.read_more}>
           Read More
