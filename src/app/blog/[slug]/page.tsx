@@ -2,69 +2,86 @@ import Image from "next/image";
 import Menu from "@/components/menu/Menu";
 import styles from "./blogDetail.module.css";
 import Comments from "@/components/comments/Comments";
+import { Suspense } from "react";
+import PageLoader from "@/components/pageLoader/PageLoader";
+import { Post } from "@/types/post";
+import { SinglePostResponse } from "@/types/api";
+import { formatDate } from "../../../../lib/utils";
 
-const BlogDetail = () => {
+interface BlogDetailPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+interface BlogDetailContentProps {
+  params: Promise<{ slug: string }>;
+}
+
+const getData = async (slug: string): Promise<Post> => {
+  const resp = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
+  );
+  if (!resp.ok) {
+    throw new Error("Failed");
+  }
+  const data: SinglePostResponse = await resp.json();
+
+  return data.post;
+};
+
+const BlogDetailContent = async ({ params }: BlogDetailContentProps) => {
+  const { slug } = await params;
+  const data = await getData(slug);
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.info_section}>
         <div className={styles.info_text}>
-          <h1 className={styles.blog_title}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </h1>
+          <h1 className={styles.blog_title}>{data.title}</h1>
           <div className={styles.blog_meta}>
             <div className={styles.author_img}>
-              <Image src="/p1.jpeg" alt="" fill className={styles.avatar} />
+              <Image
+                src={data.user.image || "/avatar-placeholder.jpg"}
+                alt=""
+                fill
+                className={styles.avatar}
+              />
             </div>
             <div className={styles.meta_text}>
-              <span className={styles.author_text}>Henry Lockwood</span>
-              <span className={styles.date}>January 04, 2025</span>
+              <span className={styles.author_text}>{data.user.name}</span>
+              <span className={styles.date}>{formatDate(data.createdAt)}</span>
             </div>
           </div>
         </div>
-        <div className={styles.info_img}>
-          <Image src="/p1.jpeg" alt="" fill className={styles.image} />
-        </div>
+        {data.img && (
+          <div className={styles.info_img}>
+            <Image src={data.img} alt="" fill className={styles.image} />
+          </div>
+        )}
       </div>
       <div className={styles.content_section}>
         <div className={styles.blog_desc}>
-          <div className={styles.blog_desc_text}>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla
-              dolore quae, ad eum in rem eius sapiente porro eligendi omnis
-              debitis saepe rerum voluptas voluptatibus quibusdam tenetur totam
-              odit ut!
-            </p>
-            <p>
-              Saepe non incidunt, tenetur aut magnam praesentium aliquam
-              necessitatibus voluptatem nam quia itaque laborum, placeat ipsum!
-              Id natus molestiae, earum, nam deleniti voluptas reiciendis optio
-              temporibus dignissimos asperiores voluptatibus iusto?
-            </p>
-            <p>
-              Perspiciatis saepe molestiae ex ab quo voluptas quidem laudantium
-              aspernatur recusandae, maxime, laborum sapiente quibusdam nemo
-              quam assumenda! Soluta alias quibusdam deserunt quisquam rem
-              deleniti quasi odio quaerat autem distinctio?
-            </p>
-            <p>
-              Aut magni mollitia commodi, eos odio id eius amet possimus facere
-              quasi repellendus, cum voluptate perspiciatis, nulla modi omnis
-              voluptas molestias. Facere inventore veritatis excepturi
-              voluptatum a consectetur ex consequuntur. Aut magni mollitia
-              commodi, eos odio id eius amet possimus facere quasi repellendus,
-              cum voluptate perspiciatis, nulla modi omnis voluptas molestias.
-              Facere inventore veritatis excepturi voluptatum a consectetur ex
-              consequuntur.
-            </p>
-          </div>
+          <div
+            className={styles.blog_desc_text}
+            dangerouslySetInnerHTML={{ __html: data.desc }}
+          />
           <div className={styles.comment}>
-            <Comments />
+            <Comments slug={slug}/>
           </div>
         </div>
-        <Menu />
+        <Suspense fallback={null}>
+          <Menu />
+        </Suspense>
       </div>
+    </>
+  );
+};
+const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
+  return (
+    <div className={styles.container}>
+      <Suspense fallback={<PageLoader />}>
+        <BlogDetailContent params={params} />
+      </Suspense>
     </div>
   );
 };
 
-export default BlogDetail;
+export default BlogDetailPage;

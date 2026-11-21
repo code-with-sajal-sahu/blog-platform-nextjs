@@ -1,28 +1,30 @@
 import Image from "next/image";
 import styles from "./card.module.css";
 import Link from "next/link";
+import { Post } from "@/types/post";
+import { formatDate } from "../../../lib/utils";
 
-const Card = () => {
+interface CardProps {
+  data: Post;
+}
+const Card = ({data}: CardProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.img_container}>
         <Image src="/p1.jpeg" alt="Post Image" fill className={styles.image} />
       </div>
       <div className={styles.text_container}>
-        <Link href="/">
-          <h1 className={styles.post_title}>Lorem Ipsum</h1>
+        <Link href={`/blog/${data.slug}`}>
+          <h1 className={styles.post_title}>{data.title}</h1>
         </Link>
         <p className={styles.post_desc}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          {data.desc}
         </p>
         <div className={styles.meta}>
-          <span className={styles.date}>January 1, 2023 - </span>
-          <span className={styles.category}>Coding</span>
+          <span className={styles.date}>{formatDate(data.createdAt)} - </span>
+          <span className={styles.category}>{data.category.title}</span>
         </div>        
-        <Link href="/" className={styles.read_more}>
+        <Link href={`/blog/${data.slug}`} className={styles.read_more}>
           Read More
         </Link>
       </div>

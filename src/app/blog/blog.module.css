@@ -5,7 +5,8 @@
     text-align: center;
     border-radius: 10px;
     font-size: 24px;
-    font-weight: 500;    
+    font-weight: 500;
+    text-transform: capitalize;
 }
 
 .content_section{

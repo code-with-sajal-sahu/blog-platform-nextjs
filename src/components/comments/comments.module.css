@@ -74,6 +74,18 @@
   font-size: 14px;
 }
 
+.login_btn_wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_btn{
+  padding: 10px 20px;
+  background-color: #ff0000;
+  border-radius: 8px;
+}
+
 .comment_desc {
   font-size: 18px;
   font-weight: 300;
