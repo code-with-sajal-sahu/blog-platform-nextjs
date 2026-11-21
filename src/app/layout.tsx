@@ -4,6 +4,7 @@ import Footer from "@/components/footer/Footer";
 import { ThemeProvider } from "next-themes";
 import { Manrope, Inter, JetBrains_Mono, Caveat } from "next/font/google";
 import AuthProvider from "@/providers/AuthProvider";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 export const manrope = Manrope({
   subsets: ["latin"],
@@ -34,22 +35,24 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     ${caveat.variable}
   `}
       >
-        <AuthProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem={false}
-          >
-            <div className="root-container">
-              <div className="wrapper">
-                <Navbar />
-                {children}
-                <Footer />
+        <ReactQueryProvider>
+          <AuthProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem={false}
+            >
+              <div className="root-container">
+                <div className="wrapper">
+                  <Navbar />
+                  {children}
+                  <Footer />
+                </div>
               </div>
-            </div>
-          </ThemeProvider>
+            </ThemeProvider>
 
-        </AuthProvider>
+          </AuthProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

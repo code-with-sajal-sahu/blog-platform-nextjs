@@ -1,4 +1,5 @@
 import { Category } from "./category";
+import { Comment } from "./comment";
 import { Post } from "./post";
 
 export interface CategoriesResponse {
@@ -13,4 +14,8 @@ export interface PostsResponse {
 
 export interface SinglePostResponse {
   post: Post;
+}
+
+export interface CommentsResponse {
+  comments: Comment[];
 }

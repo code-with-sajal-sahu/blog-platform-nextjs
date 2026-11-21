@@ -64,7 +64,7 @@ const BlogDetailContent = async ({ params }: BlogDetailContentProps) => {
             dangerouslySetInnerHTML={{ __html: data.desc }}
           />
           <div className={styles.comment}>
-            <Comments />
+            <Comments slug={slug}/>
           </div>
         </div>
         <Suspense fallback={null}>
