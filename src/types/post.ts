@@ -1,4 +1,5 @@
 import { Category } from "./category";
+import { User } from "./user";
 
 export interface Post {
     id: string;
@@ -10,5 +11,6 @@ export interface Post {
     categorySlug: string;
     category: Category;
     userEmail: string;
+    user: User;
     createdAt: Date;
 }

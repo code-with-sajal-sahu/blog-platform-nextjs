@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./card.module.css";
 import Link from "next/link";
 import { Post } from "@/types/post";
+import { formatDate } from "../../../lib/utils";
 
 interface CardProps {
   data: Post;
@@ -20,7 +21,7 @@ const Card = ({data}: CardProps) => {
           {data.desc}
         </p>
         <div className={styles.meta}>
-          <span className={styles.date}>{(new Date(data.createdAt)).toLocaleDateString()} - </span>
+          <span className={styles.date}>{formatDate(data.createdAt)} - </span>
           <span className={styles.category}>{data.category.title}</span>
         </div>        
         <Link href={`/blog/${data.slug}`} className={styles.read_more}>

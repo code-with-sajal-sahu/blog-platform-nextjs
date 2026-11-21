@@ -10,3 +10,7 @@ export interface PostsResponse {
   currentPage: number;
   totalPages: number;
 }
+
+export interface SinglePostResponse {
+  post: Post;
+}

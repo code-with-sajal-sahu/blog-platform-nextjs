@@ -1,7 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { prisma } from "../../../../lib/prisma";
-import { Post } from "@/types/post";
-import { Category } from "@/types/category";
+import { Category } from "@prisma/client";
 
 export const GET = async (req: NextRequest) => {
   const searchParams = req.nextUrl.searchParams;
@@ -13,13 +12,13 @@ export const GET = async (req: NextRequest) => {
   const query = {
     take: DATA_PER_PAGE,
     skip: DATA_PER_PAGE * (currentPage - 1),
-    include: {category: true},
+    include: {category: true, user: true},
     where: {
       ...(!!catg && { categorySlug: catg }),
     },
   };
   try {
-    const [posts, count]: [Post[], number] = await prisma.$transaction([
+    const [posts, count] = await prisma.$transaction([
       prisma.post.findMany(query),
       prisma.post.count({ where: query.where }),
     ]);

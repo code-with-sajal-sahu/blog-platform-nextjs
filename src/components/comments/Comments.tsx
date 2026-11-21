@@ -1,13 +1,18 @@
+"use client"
 import Link from "next/link";
 import styles from "./comments.module.css";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 const Comments = () => {
-  const isAuthenticated = true;
+  const {status} = useSession();
+  const isAuthenticated = status === "authenticated";
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Comments</h1>
       {!isAuthenticated ? (
-        <Link href="">Login to write a comment</Link>
+        <div className={styles.login_btn_wrapper}>
+          <Link href="/login" className={styles.login_btn}>Login to write a comment</Link>
+        </div>
       ) : (
         <div className={styles.input_section}>
           <textarea placeholder="Write a comment..." className={styles.input} />
